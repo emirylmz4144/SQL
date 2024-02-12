@@ -1,3 +1,4 @@
+--employee tablosu oluştur
 Create table employee
 (
     id serial  PRIMARY KEY,
@@ -6,6 +7,7 @@ Create table employee
     email varchar(50) NOT NULL
 );
 
+--tabloya veri ekle
 insert into employee (name, birthDay, email) values ('Aimée', '1999-04-04', 'rbaudon0@cam.ac.uk');
 insert into employee (name, birthDay, email) values ('Eléa', '1983-03-17', 'hmarrow1@google.com.hk');
 insert into employee (name, birthDay, email) values ('Kallisté', '1997-08-22', 'zmale2@state.tx.us');
@@ -58,28 +60,30 @@ insert into employee (name, birthDay, email) values ('Adèle', '1978-10-07', 'nd
 insert into employee (name, birthDay, email) values ('Loïca', '1985-06-09', 'fsimoncelli1d@wired.com');
 
 
-
+--id'si 4 ile 20 arasında olanların ismini emir olarak değiştir
 Update employee
    set name='emir'
    where (id between 4 and 20)
 
+--e ile başlayan kişilierin doğum tarihini belirtildiği gibi güncelle
 Update employee
    set birthday='2002-05-10'
    where email ilike 'e%'
 returning *;
 
-update employee
-    set name='Bu kişi silindi',
-    birthday='1975-01-01'
+--email içerisinde 5 rakamı içeren kişileri sil
+delete from employee
     where email ilike '%5%'
 returning * ;
 
+--Farklı bir yolla belirtilen tarih aralığındaki kişilerin ismi güncellenerek kaydı tutulmaz yani silinir
 update employee
    set name='tarihten dolayı silindi'
     where (birthday in ('1999-04-04','1983-03-17') )
 returning * ;
 
 
+--Örnek bazı silme işlemleri
 
 delete from employee
 where (id > 5 and id < 11)
