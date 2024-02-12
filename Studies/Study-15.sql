@@ -1,35 +1,24 @@
---katagori türünde kaç adet film var
+--Yazarların yazdığı toplam sayfa sayısı
+select authors.author_name,sum(books.page_number) as yazdigi_toplamsayfa from authors
+join books on authors.id=books.author_id
+group by authors.author_name;
 
-select category.name,count(*) from category
-join film_category on category.category_id=film_category.category_id
-join film on film.film_id=film_category.film_id
-group by category.name
-order by count(*)
+-- Yazarların yazdığı toplam kitap sayısı
+select authors.author_name,count(*) as yazdigi_kitap_sayisi from authors
+join books on authors.id = books.author_id
+group by authors.author_name
 
--- ratingi en yüksek olam film
-select rating, count(*) from film
-group by rating
-order by count(*) desc
-limit 1
+--city tablosu ile country tablosunda bulunan şehir (city) ve ülke (country)
+--isimlerini birlikte görebileceğimiz INNER JOIN sorgusunu yazınız.
 
---İsmi k ile başlayan en uzun ve replacement cost'u en küçük olan 3 film
-select title,length,replacement_cost from film
-where title like 'K%'
-order by length desc, replacement_cost asc
-limit 3
+select city.city,country.country from city
+join country on country.country_id=city.country_id;
 
---en çok alışveriş yapan kişi
-select customer.first_name from payment
-join customer on payment.customer_id=customer.customer_id
-group by first_name
-order by count(*) desc
-limit 1
+-- Alışverişe en fazla para harcayan 10 kişi ve yaptıkları  alişveriş sayısı 
+select  customer.first_name, count(*) as alisveris_sayisi,sum(amount) as toplam_fiyat from customer
+join payment on payment.customer_id=customer.customer_id
+group by customer.first_name
+order by sum(amount) desc
+limit 10;
+-- 
 
-
---en fazla harcama yapan kişi
-
-select customer.customer_id ,customer.first_name,customer.last_name,sum(payment.amount) as purchase_amount from payment
-join customer on customer.customer_id=payment.customer_id
-group by customer.customer_id,customer.first_name,customer.last_name
-order by purchase_amount desc
-limit 1

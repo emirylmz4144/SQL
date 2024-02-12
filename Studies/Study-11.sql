@@ -1,3 +1,7 @@
+--veri tipleri ve seçilen sütun sayıları aynı olan bazı tabloların alt alta sıralacak şekilde birleşitrimesine
+--bazı örnekler aşağıda verilmiştir
+
+
 (select first_name from actor)
 union
 (select first_name from customer);

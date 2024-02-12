@@ -1,8 +1,8 @@
-staff_id,customer_id,payment_date(date türünde ve odeme_tarihi adında sanal kolonda olacak şekilde)
-payment_date(date türünde olduğu kesinleştirildi) 2006-02-20 tarihinden büyük olan 
-staff_id customer_id, ve payment_date tarihine göre gruplayarak
-staff_id ve customer id artan payment_date azalan şekilde olacak şekilde 
-payment tablosundan seç 
+--staff_id,customer_id,payment_date(date türünde ve odeme_tarihi adında sanal kolonda olacak şekilde)
+--payment_date(date türünde olduğu kesinleştirildi) 2006-02-20 tarihinden büyük olan
+--staff_id customer_id, ve payment_date tarihine göre gruplayarak
+--staff_id ve customer id artan payment_date azalan şekilde olacak şekilde
+--payment tablosundan seç
 
 SELECT staff_id, customer_id, payment_date::date as odeme_tarihi
 FROM payment
